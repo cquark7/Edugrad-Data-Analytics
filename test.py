@@ -94,3 +94,27 @@ class Stack(Queue):
             temp = self.dequeue()
             self.enqueue(temp)
         return self.dequeue()
+
+
+def bubble_sort(arr):
+    length = len(arr)
+    for i in range(length - 1):
+        swapped = False
+        for j in range(length - 1 - i):
+            if arr[j] > arr[j + 1]:
+                swapped = True
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+        if not swapped:
+            break
+    return arr
+
+
+def selection_sort(arr):
+    length = len(arr)
+    for i in range(length-1):
+        min_idx = i
+        for j in range(i+1, length):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[min_idx], arr[i] = arr[i], arr[min_idx]
+    return arr
