@@ -94,4 +94,3 @@ class Stack(Queue):
             temp = self.dequeue()
             self.enqueue(temp)
         return self.dequeue()
-
