@@ -58,7 +58,7 @@ class LinkedList:
 
     def traverse(self):
         """
-        Traverses the Nodes and prints data on STDOUT
+        Traverses the Nodes and prints values on STDOUT
         Time Complexity: O(n)
         :return: None
         """
@@ -97,10 +97,10 @@ class Stack(Queue):
 
 
 def bubble_sort(arr):
-    length = len(arr)
-    for i in range(length - 1):
+    size = len(arr)
+    for i in range(size - 1):
         swapped = False
-        for j in range(length - 1 - i):
+        for j in range(size - 1 - i):
             if arr[j] > arr[j + 1]:
                 swapped = True
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
@@ -110,10 +110,10 @@ def bubble_sort(arr):
 
 
 def selection_sort(arr):
-    length = len(arr)
-    for i in range(length-1):
+    size = len(arr)
+    for i in range(size-1):
         min_idx = i
-        for j in range(i+1, length):
+        for j in range(i+1, size):
             if arr[j] < arr[min_idx]:
                 min_idx = j
         arr[min_idx], arr[i] = arr[i], arr[min_idx]
