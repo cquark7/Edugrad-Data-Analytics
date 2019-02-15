@@ -1,120 +1,68 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+import numpy as np
+from matplotlib import pyplot as plt
 
+# Problem 1
+nums = [1, 2, 3, 0, 0, 5, 10]
+a = np.array(nums)
+print('Array type:', type(a))
+print('Array shape:', a.shape)
 
-class LinkedList:
-    """
-    A singly linked list with both head and tail
-    """
-    def __init__(self):
-        self.head = self.tail = None
-        self.size = 0
+# Problem 2
+a = np.arange(2, 11).reshape(3, 3)
+print('3x3 Matrix:\n', a)
 
-    def __len__(self):
-        return self.size
+# Problem 3
 
-    def is_empty(self):
-        """
-        Checks if the LinkedList is empty or not
-        :return: bool
-        """
-        if self.head == self.tail is None:
-            return True
-        return False
+# Method 1:
+print('Reversed array using 1st method:')
+a = [5, 4, 3, 2, 1, 100]
+a_rev = a[::-1]
+print(a_rev)
 
-    def insert_at_end(self, data):
-        """
-        Adds a new node at the end of the LinkedList
-        Time Complexity: O(1)
-        :param data: value you want to add at the end
-        :return: None
-        """
-        if self.is_empty():
-            self.head = self.tail = Node(data)
-        else:
-            last_node = self.tail
-            last_node.next = Node(data)
-            self.tail = last_node.next
-        self.size += 1
+# Method 2
+print('Reversed array using 2nd method:')
+a = [5, 4, 3, 2, 1, 100]
+for i in range(len(a) // 2):
+    # in-place swaps
+    a[i], a[-i - 1] = a[-i - 1], a[i]
+print(a)
 
-    def remove_from_beg(self):
-        """
-        Removes node which is at the beginning of LinkedList
-        Time Complexity: O(1)
-        :return: self.head.data
-        """
-        if self.is_empty():
-            raise Exception("Data Structure is empty")
-        else:
-            head_node = self.head
-            self.head = head_node.next
-            # when the only node is removed
-            if self.head is None:
-                self.tail = None
-        self.size -= 1
-        return head_node.data
+# Problem 4
+a = np.array([1, 2, 3, 0])
+print(np.append(a, 4))
 
-    def traverse(self):
-        """
-        Traverses the Nodes and prints values on STDOUT
-        Time Complexity: O(n)
-        :return: None
-        """
-        if self.is_empty():
-            raise Exception("Data Structure is empty")
-        cur_node = self.head
-        while cur_node:
-            print(cur_node.data, end=' ')
-            cur_node = cur_node.next
-        print()
+# Problem 5
+a = np.array([1, 2, 0, 0, 4, 0])
+print(np.where(a != 0))
 
+# Problem 6
+null_vec = np.zeros(10)
+print(null_vec)
 
-class Queue(LinkedList):
-    """
-    Queue (FIFO) data structure implementation using singly LinkedList
-    """
-    def enqueue(self, data):
-        return self.insert_at_end(data)
+# Problem 7
+null_vec = np.zeros(10)
+null_vec[4] = 1
+print(null_vec)
 
-    def dequeue(self):
-        return self.remove_from_beg()
+# Problem 8
+rand_vec = np.random.random(10)
+rand_vec.sort()
+print('Random vector of sorted values:\n', rand_vec)
 
+# Problem 9
+matrix = np.random.randint(100, size=40).reshape(5, 8)
+print('Matrix:\n', matrix)
+mean = matrix.mean(axis=1, keepdims=True)
+print('Mean for each row:\n', mean)
+# Subtract mean from each row using broadcasting
+print(matrix - mean)
 
-class Stack(Queue):
-    """
-    Stack (LIFO) data structure implementation using a Queue
-    """
-    def push(self, data):
-        return self.enqueue(data)
+# Problem 10
+data = [1, 2, 1, 3, 4, 5, 1, 3, 4, 1, 2, 3, 5, 4, 1, 2, 3, 4, 1, 3, 2]
+bins = [0, 1, 2, 3, 4, 5, 6]
+hist, bins = np.histogram(data, bins=bins)
+print(hist, bins)
 
-    def pop(self):
-        for _ in range(self.size-1):
-            temp = self.dequeue()
-            self.enqueue(temp)
-        return self.dequeue()
-
-
-def bubble_sort(arr):
-    size = len(arr)
-    for i in range(size - 1):
-        swapped = False
-        for j in range(size - 1 - i):
-            if arr[j] > arr[j + 1]:
-                swapped = True
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-        if not swapped:
-            break
-    return arr
-
-
-def selection_sort(arr):
-    size = len(arr)
-    for i in range(size-1):
-        min_idx = i
-        for j in range(i+1, size):
-            if arr[j] < arr[min_idx]:
-                min_idx = j
-        arr[min_idx], arr[i] = arr[i], arr[min_idx]
-    return arr
+plt.hist(data, bins=bins)
+plt.title("histogram")
+plt.show()
