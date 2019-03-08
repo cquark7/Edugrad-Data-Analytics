@@ -1,68 +1,39 @@
-import numpy as np
-from matplotlib import pyplot as plt
+import pandas as pd
+# Part I data
+from data import exam_data, browser_data, employee_data, sample_data
 
-# Problem 1
-nums = [1, 2, 3, 0, 0, 5, 10]
-a = np.array(nums)
-print('Array type:', type(a))
-print('Array shape:', a.shape)
 
-# Problem 2
-a = np.arange(2, 11).reshape(3, 3)
-print('3x3 Matrix:\n', a)
+exam_data = pd.DataFrame(exam_data)
 
-# Problem 3
+del exam_data['attempts']
+# print(exam_data)
 
-# Method 1:
-print('Reversed array using 1st method:')
-a = [5, 4, 3, 2, 1, 100]
-a_rev = a[::-1]
-print(a_rev)
+browser = pd.DataFrame(browser_data, index=['Firefox', 'Chrome', 'Safari', 'IE10', 'Konqueror'])
 
-# Method 2
-print('Reversed array using 2nd method:')
-a = [5, 4, 3, 2, 1, 100]
-for i in range(len(a) // 2):
-    # in-place swaps
-    a[i], a[-i - 1] = a[-i - 1], a[i]
-print(a)
+browser.index = ['Iceweasel', 'Safari', 'IE 10', 'Chrome', 'Comodo Dragon']
+# print(browser)
 
-# Problem 4
-a = np.array([1, 2, 3, 0])
-print(np.append(a, 4))
+employees = pd.DataFrame(employee_data)
+# print(employees[employees.Age >= 68])
 
-# Problem 5
-a = np.array([1, 2, 0, 0, 4, 0])
-print(np.where(a != 0))
 
-# Problem 6
-null_vec = np.zeros(10)
-print(null_vec)
+Army = pd.DataFrame(sample_data)
+Army.set_index('Origin', inplace=True)
+print(Army)
 
-# Problem 7
-null_vec = np.zeros(10)
-null_vec[4] = 1
-print(null_vec)
+# df2 = Army.loc[['Georgia', 'Florida', 'California'], ['Regiment', 'Deaths', 'Size']]
+# print(df2)
+#
+# print(Army.iloc[2:9, 3:7])
+#
+# print(Army.iloc[3:])
+#
+# print(Army.iloc[:, 4:9])
+#
+# print(Army[Army.Battles > 5])
 
-# Problem 8
-rand_vec = np.random.random(10)
-rand_vec.sort()
-print('Random vector of sorted values:\n', rand_vec)
+# print(Army[(Army.Deaths > 500) | (Army.Deaths < 50)])
 
-# Problem 9
-matrix = np.random.randint(100, size=40).reshape(5, 8)
-print('Matrix:\n', matrix)
-mean = matrix.mean(axis=1, keepdims=True)
-print('Mean for each row:\n', mean)
-# Subtract mean from each row using broadcasting
-print(matrix - mean)
+# print(Army[~(Army.Regiment == 'Scouts')])
 
-# Problem 10
-data = [1, 2, 1, 3, 4, 5, 1, 3, 4, 1, 2, 3, 5, 4, 1, 2, 3, 4, 1, 3, 2]
-bins = [0, 1, 2, 3, 4, 5, 6]
-hist, bins = np.histogram(data, bins=bins)
-print(hist, bins)
-
-plt.hist(data, bins=bins)
-plt.title("histogram")
-plt.show()
+print(Army.loc['Alaska'][2])
